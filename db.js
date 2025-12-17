@@ -62,27 +62,22 @@ export function migrate() {
     CREATE TABLE IF NOT EXISTS campaigns (
       id TEXT PRIMARY KEY,
       client_id TEXT NOT NULL,
-
       name TEXT NOT NULL,
       ad_account_id TEXT NOT NULL,
       pixel_id TEXT,
       page_id TEXT,
       lp_url TEXT NOT NULL,
       event_name TEXT,
-
       country_codes TEXT NOT NULL,
       daily_budget_inr INTEGER NOT NULL,
-
       creative_type TEXT NOT NULL,
       primary_text TEXT NOT NULL,
       headline TEXT NOT NULL,
-
       status TEXT NOT NULL DEFAULT 'draft',
       meta_campaign_id TEXT,
       meta_adset_id TEXT,
       meta_ad_id TEXT,
       error_message TEXT,
-
       created_at TEXT NOT NULL DEFAULT (datetime('now')),
       FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
     );
@@ -93,10 +88,8 @@ export function migrate() {
       client_id TEXT NOT NULL,
       level TEXT NOT NULL,
       meta_id TEXT NOT NULL,
-
       date_start TEXT NOT NULL,
       date_stop TEXT NOT NULL,
-
       spend REAL,
       impressions INTEGER,
       clicks INTEGER,
@@ -104,10 +97,8 @@ export function migrate() {
       ctr REAL,
       cpc REAL,
       cpm REAL,
-
       raw_json TEXT,
       created_at TEXT NOT NULL DEFAULT (datetime('now')),
-
       UNIQUE (client_id, level, meta_id, date_start, date_stop),
       FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
     );
