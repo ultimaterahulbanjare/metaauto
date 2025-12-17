@@ -1,23 +1,20 @@
-# Meta Ads SaaS (SQLite) — Single Service v3 (Verified)
+# Meta Ads Automation (Single Service) — v4
 
-## What’s fixed vs v2
-- ✅ Node syntax error fixed (`["IN"]` string escaping)
-- ✅ Added `npm run check` (Node parse check)
-- ✅ Pinned Node engines to avoid version surprises
+## Fixes in v4
+- UI hash routing fixed: `/#register` now actually opens Register (older build forced Login).
+- Fixed JS parse crash in error message containing ["IN"].
 
-## Render (FREE mode — no paid disk)
+## Free mode (no paid disk)
 Use:
-- SQLITE_PATH=/tmp/app.sqlite
+SQLITE_PATH=/tmp/app.sqlite
+(DB resets on redeploy/restart — ok for testing)
 
-Note: DB can reset on redeploy/restart (ok for testing).
-
-## Required ENV on Render
-APP_BASE_URL=https://metaauto.onrender.com
-META_REDIRECT_URI=https://metaauto.onrender.com/meta/oauth/callback
-META_APP_ID=...
-META_APP_SECRET=...
-JWT_SECRET=...
-
-## Meta Developers
-Facebook Login → Settings → Valid OAuth Redirect URIs:
+## Meta OAuth settings (must match exactly)
+Valid OAuth Redirect URI:
 https://metaauto.onrender.com/meta/oauth/callback
+
+App Domains:
+metaauto.onrender.com
+
+Website URL:
+https://metaauto.onrender.com

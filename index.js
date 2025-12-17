@@ -329,6 +329,9 @@ const UI_HTML = `<!doctype html>
   }
 
   function nav(view){
+    const authed = !!token();
+    const protectedViews = ['meta','launch','dashboard'];
+    if(!authed && protectedViews.includes(view)) view='login';
     setActive(view);
     ['login','register','meta','launch','dashboard'].forEach(v=>{
       const box = document.getElementById('view-'+v);
@@ -525,7 +528,9 @@ const UI_HTML = `<!doctype html>
   const qs = new URLSearchParams(location.search);
   if(qs.get('meta')==='ok') showMsg(document.getElementById('banner'),'ok','Meta connected ✅');
   if(qs.get('meta')==='fail') showMsg(document.getElementById('banner'),'err','Meta connect failed ❌ (check redirect URI + app mode)');
-  if(!token()) nav('login'); else nav('dashboard');
+  function routeFromHash(){ const h=(location.hash||'').replace('#','').trim(); return h || (token() ? 'dashboard' : 'login'); }
+  window.addEventListener('hashchange', ()=> nav(routeFromHash()));
+  nav(routeFromHash());
 </script>
 </body>
 </html>`;
@@ -605,10 +610,10 @@ app.get("/meta/oauth/callback", async (req, res) => {
       [uuidv4(), st.client_id, tokenData.access_token, tokenData.token_type || null, expiresAt, JSON.stringify(tokenData)]
     );
 
-    res.redirect(`${APP_BASE_URL}/?meta=ok`);
+    res.redirect(`${APP_BASE_URL}/?meta=ok#meta`);
   } catch (e) {
     console.error(e?.response?.data || e);
-    res.redirect(`${APP_BASE_URL}/?meta=fail`);
+    res.redirect(`${APP_BASE_URL}/?meta=fail#meta`);
   }
 });
 
