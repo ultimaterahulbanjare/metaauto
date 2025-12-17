@@ -1,6 +1,11 @@
-# Meta Ads SaaS (SQLite) — Single Service v2
+# Meta Ads SaaS (SQLite) — Single Service v3 (Verified)
 
-## Free Render mode (no paid disk)
+## What’s fixed vs v2
+- ✅ Node syntax error fixed (`["IN"]` string escaping)
+- ✅ Added `npm run check` (Node parse check)
+- ✅ Pinned Node engines to avoid version surprises
+
+## Render (FREE mode — no paid disk)
 Use:
 - SQLITE_PATH=/tmp/app.sqlite
 

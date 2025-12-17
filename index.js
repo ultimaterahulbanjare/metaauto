@@ -650,7 +650,7 @@ app.post("/campaigns/launch", requireAuth, upload.single("file"), async (req, re
 
   let countries;
   try { countries = typeof country_codes === "string" ? JSON.parse(country_codes) : country_codes; }
-  catch { return res.status(400).json({ error: "country_codes must be JSON array like ["IN"]" }); }
+  catch { return res.status(400).json({ error: "country_codes must be JSON array like [\"IN\"]" }); }
   if (!Array.isArray(countries) || countries.length === 0) return res.status(400).json({ error: "country_codes empty" });
 
   const id = uuidv4();
